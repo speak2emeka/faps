@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+
+# Local upload/runtime output
+assets/uploads/*
+!assets/uploads/.gitkeep
+
+# Local environment overrides
+.env
+.env.*
+
