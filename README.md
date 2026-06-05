@@ -43,10 +43,11 @@ Admin entry point:
 
 Default demo credentials:
 
-- Username: `admin`
-- Password: `admin123`
+- Super Admin: `admin` / `admin123`
+- Primary Admin: `primary_admin` / `admin123`
+- Secondary Admin: `secondary_admin` / `admin123`
 
-Change the default password before production use.
+Change all default passwords before production use.
 
 ### CMS Modules
 
@@ -102,4 +103,3 @@ The folder is ignored by git except for `.gitkeep`, so production uploads will n
 - PHP CMS/API features require a PHP + MySQL host.
 - The frontend includes fallback sample content when the database is not connected.
 - WhatsApp chat is integrated through the floating button on public pages.
-

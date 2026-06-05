@@ -9,6 +9,12 @@ ALTER TABLE `stem_programs` ADD COLUMN `school_scope` ENUM('all', 'primary', 'se
 ALTER TABLE `downloads` ADD COLUMN `school_scope` ENUM('all', 'primary', 'secondary') DEFAULT 'all' AFTER `id`;
 ALTER TABLE `newsletter_posts` ADD COLUMN `school_scope` ENUM('all', 'primary', 'secondary') DEFAULT 'all' AFTER `id`;
 ALTER TABLE `testimonials` ADD COLUMN `school_scope` ENUM('all', 'primary', 'secondary') DEFAULT 'all' AFTER `id`;
+ALTER TABLE `users` ADD COLUMN `school_scope` ENUM('all', 'primary', 'secondary') DEFAULT 'all' AFTER `role`;
+
+INSERT INTO `users` (`username`, `email`, `full_name`, `password`, `role`, `school_scope`) VALUES
+('primary_admin', 'primary-admin@fapsroyalprestige.edu.ng', 'FAPS Primary Administrator', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'editor', 'primary'),
+('secondary_admin', 'secondary-admin@fapsroyalprestige.edu.ng', 'Royal Prestige Secondary Administrator', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'editor', 'secondary')
+ON DUPLICATE KEY UPDATE `school_scope` = VALUES(`school_scope`), `full_name` = VALUES(`full_name`);
 
 CREATE TABLE IF NOT EXISTS `facilities` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,

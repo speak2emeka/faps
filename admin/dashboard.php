@@ -78,6 +78,7 @@ $actions = [
       <div>
         <span class="eyebrow">Admin Dashboard</span>
         <h1>FAPS and Royal Prestige CMS</h1>
+        <p style="margin:0;color:#627084">Signed in as <?php echo htmlspecialchars($_SESSION['admin_username']); ?> (<?php echo htmlspecialchars(ucwords($_SESSION['admin_school_scope'] ?? 'all')); ?>)</p>
       </div>
       <a class="btn secondary" href="../public/index.html">View Website</a>
     </div>

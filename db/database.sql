@@ -12,6 +12,7 @@ CREATE TABLE `users` (
   `email` VARCHAR(100) UNIQUE NOT NULL,
   `full_name` VARCHAR(100),
   `role` ENUM('admin', 'editor', 'viewer') DEFAULT 'editor',
+  `school_scope` ENUM('all', 'primary', 'secondary') DEFAULT 'all',
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `last_login` TIMESTAMP NULL,
   `is_active` BOOLEAN DEFAULT TRUE
@@ -207,9 +208,11 @@ CREATE TABLE `contact_submissions` (
   KEY `email_idx` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Insert default admin user (admin/admin123)
-INSERT INTO `users` (`username`, `email`, `full_name`, `password`, `role`) VALUES 
-('admin', 'admin@fapsroyalprestige.edu.ng', 'Administrator', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+-- Insert default admin users. Demo password for all: admin123
+INSERT INTO `users` (`username`, `email`, `full_name`, `password`, `role`, `school_scope`) VALUES 
+('admin', 'admin@fapsroyalprestige.edu.ng', 'Super Administrator', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'all'),
+('primary_admin', 'primary-admin@fapsroyalprestige.edu.ng', 'FAPS Primary Administrator', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'editor', 'primary'),
+('secondary_admin', 'secondary-admin@fapsroyalprestige.edu.ng', 'Royal Prestige Secondary Administrator', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'editor', 'secondary');
 
 -- Insert sample sliders
 INSERT INTO `sliders` (`title`, `subtitle`, `image`, `button_text`, `button_link`, `sort_order`, `is_active`) VALUES 

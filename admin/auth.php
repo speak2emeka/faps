@@ -18,13 +18,19 @@ $action = isset($_POST['action']) ? sanitize_input($_POST['action']) : '';
 if ($action === 'login') {
     $username = sanitize_input($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
+    $demoUsers = [
+        ADMIN_USERNAME => ['password' => ADMIN_PASSWORD, 'role' => 'admin', 'scope' => 'all', 'id' => 1],
+        'primary_admin' => ['password' => ADMIN_PASSWORD, 'role' => 'editor', 'scope' => 'primary', 'id' => 2],
+        'secondary_admin' => ['password' => ADMIN_PASSWORD, 'role' => 'editor', 'scope' => 'secondary', 'id' => 3],
+    ];
     
     try {
         if (!$pdo) {
-            if ($username === ADMIN_USERNAME && $password === ADMIN_PASSWORD) {
-                $_SESSION['admin_id'] = 1;
-                $_SESSION['admin_username'] = ADMIN_USERNAME;
-                $_SESSION['admin_role'] = 'admin';
+            if (isset($demoUsers[$username]) && $password === $demoUsers[$username]['password']) {
+                $_SESSION['admin_id'] = $demoUsers[$username]['id'];
+                $_SESSION['admin_username'] = $username;
+                $_SESSION['admin_role'] = $demoUsers[$username]['role'];
+                $_SESSION['admin_school_scope'] = $demoUsers[$username]['scope'];
                 $_SESSION['admin_login_time'] = time();
                 echo json_encode(['success' => true, 'message' => 'Login successful. Database setup is still required for CMS storage.']);
             } else {
@@ -38,10 +44,11 @@ if ($action === 'login') {
         
         // For demo purposes, also check direct comparison
         if (!$user) {
-            if ($username === ADMIN_USERNAME && $password === ADMIN_PASSWORD) {
-                $_SESSION['admin_id'] = 1;
-                $_SESSION['admin_username'] = ADMIN_USERNAME;
-                $_SESSION['admin_role'] = 'admin';
+            if (isset($demoUsers[$username]) && $password === $demoUsers[$username]['password']) {
+                $_SESSION['admin_id'] = $demoUsers[$username]['id'];
+                $_SESSION['admin_username'] = $username;
+                $_SESSION['admin_role'] = $demoUsers[$username]['role'];
+                $_SESSION['admin_school_scope'] = $demoUsers[$username]['scope'];
                 $_SESSION['admin_login_time'] = time();
                 
                 echo json_encode(['success' => true, 'message' => 'Login successful']);
@@ -54,6 +61,7 @@ if ($action === 'login') {
                 $_SESSION['admin_id'] = $user['id'];
                 $_SESSION['admin_username'] = $user['username'];
                 $_SESSION['admin_role'] = $user['role'];
+                $_SESSION['admin_school_scope'] = $user['school_scope'] ?? 'all';
                 $_SESSION['admin_login_time'] = time();
                 
                 // Update last login
@@ -86,7 +94,7 @@ if ($action === 'check') {
             session_destroy();
             echo json_encode(['success' => false, 'message' => 'Session expired']);
         } else {
-            echo json_encode(['success' => true, 'user' => $_SESSION['admin_username']]);
+            echo json_encode(['success' => true, 'user' => $_SESSION['admin_username'], 'school_scope' => $_SESSION['admin_school_scope'] ?? 'all']);
         }
     } else {
         echo json_encode(['success' => false]);

@@ -109,6 +109,15 @@
             margin-bottom: 8px;
             color: #1B4D7D;
         }
+        .credential-row {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(27, 77, 125, 0.14);
+        }
+        .credential-row:first-of-type {
+            border-top: 0;
+            padding-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -135,8 +144,9 @@
             
             <div class="demo-credentials">
                 <strong>Demo Credentials:</strong>
-                Username: admin<br>
-                Password: admin123
+                <div class="credential-row">Super Admin<br>Username: admin<br>Password: admin123</div>
+                <div class="credential-row">Primary Admin<br>Username: primary_admin<br>Password: admin123</div>
+                <div class="credential-row">Secondary Admin<br>Username: secondary_admin<br>Password: admin123</div>
             </div>
         </div>
     </div>
