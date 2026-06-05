@@ -41,6 +41,8 @@ Admin entry point:
 
 `admin/login.html`
 
+On GitHub Pages or when opened from `file://`, the login opens a static dashboard preview after valid demo credentials. Real content editing requires PHP and MySQL hosting.
+
 Default demo credentials:
 
 - Super Admin: `admin` / `admin123`

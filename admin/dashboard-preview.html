@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Preview - FAPS and Royal Prestige CMS</title>
+  <link rel="stylesheet" href="../css/school.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <a class="brand" href="dashboard-preview.html"><span class="brand-mark">FR</span><span><strong>School CMS</strong><span>Static Admin Preview</span></span></a>
+    <nav class="admin-nav">
+      <a class="active" href="dashboard-preview.html">Dashboard Preview</a>
+      <a href="manage-primary-activities.php">Primary Activities</a>
+      <a href="manage-secondary-activities.php">Secondary Activities</a>
+      <a href="manage-primary-facilities.php">Primary Facilities</a>
+      <a href="manage-secondary-facilities.php">Secondary Facilities</a>
+      <a href="manage-primary-gallery.php">Primary Gallery</a>
+      <a href="manage-secondary-gallery.php">Secondary Gallery</a>
+      <a href="login.html" onclick="sessionStorage.removeItem('adminPreviewUser')">Logout</a>
+    </nav>
+  </aside>
+  <main class="admin-main">
+    <div class="admin-top">
+      <div>
+        <span class="eyebrow">Preview Mode</span>
+        <h1>FAPS and Royal Prestige CMS</h1>
+        <p id="signedInText" style="margin:0;color:#627084">Signed in as demo admin</p>
+      </div>
+      <a class="btn secondary" href="../public/index.html">View Website</a>
+    </div>
+    <div class="admin-content">
+      <div class="message">This is a static preview for GitHub Pages/file viewing. The real CMS modules require PHP and MySQL hosting.</div>
+      <div class="grid four">
+        <article class="card pad"><span class="eyebrow">Primary Activities</span><h2>6</h2></article>
+        <article class="card pad"><span class="eyebrow">Secondary Activities</span><h2>6</h2></article>
+        <article class="card pad"><span class="eyebrow">Primary Facilities</span><h2>6</h2></article>
+        <article class="card pad"><span class="eyebrow">Secondary Facilities</span><h2>6</h2></article>
+      </div>
+      <section class="section" style="padding-bottom:0">
+        <span class="eyebrow">Admin Sections</span>
+        <h2>What the real dashboard manages</h2>
+        <div class="grid four">
+          <article class="card pad"><h3>Primary Admin</h3><p>FAPS activities, facilities, gallery, admissions updates, and parent notices.</p></article>
+          <article class="card pad"><h3>Secondary Admin</h3><p>Royal Prestige activities, facilities, gallery, STEM, leadership, and exam updates.</p></article>
+          <article class="card pad"><h3>Media Uploads</h3><p>Upload photos and videos with school-specific categories and publish controls.</p></article>
+          <article class="card pad"><h3>Website Updates</h3><p>Manage news, events, newsletters, downloads, sliders, and testimonials.</p></article>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+const user = JSON.parse(sessionStorage.getItem('adminPreviewUser') || 'null');
+if (!user) {
+  window.location.href = 'login.html';
+} else {
+  document.getElementById('signedInText').textContent = `Signed in as ${user.username} (${user.role}, ${user.scope})`;
+}
+</script>
+</body>
+</html>

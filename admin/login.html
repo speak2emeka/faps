@@ -152,6 +152,16 @@
     </div>
 
     <script>
+        const demoUsers = {
+            admin: { password: 'admin123', scope: 'All', role: 'Super Admin' },
+            primary_admin: { password: 'admin123', scope: 'Primary', role: 'Primary Admin' },
+            secondary_admin: { password: 'admin123', scope: 'Secondary', role: 'Secondary Admin' }
+        };
+
+        function isStaticPreview() {
+            return window.location.protocol === 'file:' || window.location.hostname.endsWith('github.io');
+        }
+
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -162,6 +172,24 @@
             
             btn.disabled = true;
             btn.textContent = 'Signing in...';
+
+            if (isStaticPreview()) {
+                const demoUser = demoUsers[username];
+                if (demoUser && demoUser.password === password) {
+                    sessionStorage.setItem('adminPreviewUser', JSON.stringify({
+                        username,
+                        role: demoUser.role,
+                        scope: demoUser.scope
+                    }));
+                    window.location.href = 'dashboard-preview.html';
+                    return;
+                }
+                errorDiv.textContent = 'Invalid demo credentials';
+                errorDiv.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Sign In';
+                return;
+            }
             
             try {
                 const response = await fetch('../admin/auth.php', {
