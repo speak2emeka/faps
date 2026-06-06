@@ -85,7 +85,7 @@ p { margin: 0 0 16px; }
   color: var(--white);
   background:
     linear-gradient(90deg, rgba(8,35,63,.92), rgba(22,76,130,.72)),
-    url("../images/bg_1.jpg") center/cover;
+    url("../images/bg_1.jpg?v=20260606") center/cover;
 }
 .hero .container { display: grid; gap: 40px; }
 .hero p { max-width: 780px; color: rgba(255,255,255,.84); font-size: clamp(1.05rem, 1.6vw, 1.3rem); }
